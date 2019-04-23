@@ -1,60 +1,61 @@
-import React from 'react';
+import React from "react";
+import news247logo from "../images/logo1.png";
+import inGrlogo from "../images/logo2.png";
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
 
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Articles from "../articles"
-import { withStyles } from '@material-ui/core/styles';
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Articles from "../articles";
+import { withStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: 'flex',
+    display: "flex"
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
-      flexShrink: 0,
-    },
+      flexShrink: 0
+    }
   },
   appBar: {
     marginLeft: drawerWidth,
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`
+    }
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
+    padding: theme.spacing.unit * 3
+  }
 });
 
 class ResponsiveDrawer extends React.Component {
   state = {
-    mobileOpen: false,
+    mobileOpen: false
   };
 
   handleDrawerToggle = () => {
@@ -69,22 +70,37 @@ class ResponsiveDrawer extends React.Component {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {["in.gr", "news247"].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+                {index === 0 && (
+                  <img src={inGrlogo} alt="logo" width="auto" height="20px" />
+                )}
+
+                {index === 1 && (
+                  <img
+                    src={news247logo}
+                    alt="logo"
+                    width="auto"
+                    height="20px"
+                  />
+                )}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
-        <Divider />
+        {/*<Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List>*/}
       </div>
     );
 
@@ -112,11 +128,11 @@ class ResponsiveDrawer extends React.Component {
             <Drawer
               container={this.props.container}
               variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              anchor={theme.direction === "rtl" ? "right" : "left"}
               open={this.state.mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{
-                paper: classes.drawerPaper,
+                paper: classes.drawerPaper
               }}
             >
               {drawer}
@@ -125,7 +141,7 @@ class ResponsiveDrawer extends React.Component {
           <Hidden xsDown implementation="css">
             <Drawer
               classes={{
-                paper: classes.drawerPaper,
+                paper: classes.drawerPaper
               }}
               variant="permanent"
               open
@@ -136,13 +152,11 @@ class ResponsiveDrawer extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Articles/>
+          <Articles />
         </main>
       </div>
     );
   }
 }
-
-
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
