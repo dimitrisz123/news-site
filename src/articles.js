@@ -9,6 +9,7 @@ const Article = () => {
 				{
 					articles {
 						title
+						image
 						summary
 						site
 					}
@@ -25,6 +26,7 @@ const Article = () => {
 						<div>
 							<h1>{article.title}</h1>
 							<p>{article.summary}</p>
+							<img src={article.image} alt="article" height="auto" width="200"/>
 							<a href={article.site}>View more</a>
 						</div>
 					);

@@ -3,15 +3,15 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
-import Article from "./articles";
+import Drawer from  "./drawer/drawer"
 
 const client = new ApolloClient({
-	uri: "https://nameless-ocean-88007.herokuapp.com/"
+	uri: "https://nameless-ocean-88008.herokuapp.com/"
 });
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
-		<Article />
+		<Drawer />
 	</ApolloProvider>,
 	document.getElementById("root")
 );
