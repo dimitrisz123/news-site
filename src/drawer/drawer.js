@@ -1,6 +1,8 @@
 import React from "react";
 import news247logo from "../images/logo1.png";
 import inGrlogo from "../images/logo2.png";
+import sport24logo from "../images/logo3.png";
+
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -10,7 +12,6 @@ import IconButton from "@material-ui/core/IconButton";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import MenuIcon from "@material-ui/icons/Menu";
@@ -55,7 +56,8 @@ const styles = theme => ({
 
 class ResponsiveDrawer extends React.Component {
   state = {
-    mobileOpen: false
+    mobileOpen: false,
+    site: ""
   };
 
   handleDrawerToggle = () => {
@@ -64,43 +66,44 @@ class ResponsiveDrawer extends React.Component {
 
   render() {
     const { classes, theme } = this.props;
+    const { site } = this.state;
 
     const drawer = (
       <div>
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {["in.gr", "news247"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index === 0 && (
-                  <img src={inGrlogo} alt="logo" width="auto" height="20px" />
-                )}
+          {["in.gr", "sport24", "news247"].map((text, index) => (
+            <ListItem
+              button
+              key={text}
+              onClick={() => this.setState({ site: text })}
+            >
+              {index === 0 && (
+                <img src={inGrlogo} alt="logo" width="auto" height="20px" />
+              )}
 
-                {index === 1 && (
-                  <img
-                    src={news247logo}
-                    alt="logo"
-                    width="auto"
-                    height="20px"
-                  />
-                )}
-              </ListItemIcon>
+              {index === 1 && (
+                <img src={sport24logo} alt="logo" width="auto" height="20px" />
+              )}
+              {index === 2 && (
+                <img src={news247logo} alt="logo" width="auto" height="20px" />
+              )}
+
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
-        {/*<Divider />
+        <Divider />
         <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
+              <img src={inGrlogo} alt="logo" width="auto" height="20px" />
+
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>*/}
+        </List>
       </div>
     );
 
@@ -152,7 +155,7 @@ class ResponsiveDrawer extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Articles />
+          <Articles site={site} />
         </main>
       </div>
     );
