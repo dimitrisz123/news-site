@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
-import Drawer from  "./drawer/drawer"
+import Drawer from "./drawer/drawer";
 
 const client = new ApolloClient({
-	uri: "https://nameless-ocean-88008.herokuapp.com/"
+	// uri: "https://nameless-ocean-88008.herokuapp.com/"
+	uri: "http://localhost:4000"
 });
 
 ReactDOM.render(
