@@ -77,7 +77,12 @@ class ResponsiveDrawer extends React.Component {
 						<ListItem
 							button
 							key={text}
-							onClick={() => this.setState({ site: text })}
+							onClick={() => {
+								this.setState({
+									site: text,
+									mobileOpen: false
+								});
+							}}
 						>
 							{index === 0 && (
 								<img

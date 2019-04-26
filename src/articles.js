@@ -47,9 +47,9 @@ const Article = ({ site }) => {
 							</div>
 						}
 					>
-						{data.articles.map(article => {
+						{data.articles.map((article, i) => {
 							return (
-								<div>
+								<div key={i}>
 									<h1>{article.title}</h1>
 									<p>{article.summary}</p>
 									<img

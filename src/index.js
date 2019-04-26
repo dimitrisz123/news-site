@@ -6,8 +6,8 @@ import ApolloClient from "apollo-boost";
 import Drawer from "./drawer/drawer";
 
 const client = new ApolloClient({
-	// uri: "https://nameless-ocean-88008.herokuapp.com/"
-	uri: "http://localhost:4000"
+	uri: "https://nameless-ocean-88008.herokuapp.com/"
+	// uri: "http://localhost:4000"
 });
 
 ReactDOM.render(
