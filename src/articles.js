@@ -15,7 +15,7 @@ const Article = ({ site }) => {
 		}
 	`;
 	return (
-		<Query query={GET_ARTICLES} variables={{ site, first: 20, skip: 20 }}>
+		<Query query={GET_ARTICLES} variables={{ site, first: 20, skip: 0 }}>
 			{({ loading, error, data, fetchMore }) => {
 				if (loading) return <p>Loading...</p>;
 				if (error) return <p>Error :(</p>;
