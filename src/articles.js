@@ -5,8 +5,18 @@ import InfiniteScroll from "react-infinite-scroller";
 
 const Article = ({ site }) => {
 	const GET_ARTICLES = gql`
-		query Article($site: String, $first: Int, $skip: Int) {
-			articles(query: $site, first: $first, skip: $skip) {
+		query Article(
+			$site: String
+			$first: Int
+			$skip: Int
+			$orderBy: ArticleOrderByInput
+		) {
+			articles(
+				query: $site
+				first: $first
+				skip: $skip
+				orderBy: $orderBy
+			) {
 				title
 				image
 				summary
@@ -15,11 +25,13 @@ const Article = ({ site }) => {
 		}
 	`;
 	return (
-		<Query query={GET_ARTICLES} variables={{ site, first: 20, skip: 0 }}>
+		<Query
+			query={GET_ARTICLES}
+			variables={{ site, first: 20, skip: 0, orderBy: "time_DESC" }}
+		>
 			{({ loading, error, data, fetchMore }) => {
 				if (loading) return <p>Loading...</p>;
 				if (error) return <p>Error :(</p>;
-
 				const loadMoreFunc = () => {
 					fetchMore({
 						variables: {
