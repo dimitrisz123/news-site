@@ -9,10 +9,14 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
+import SearchIcon from "@material-ui/icons/Search";
+
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import InputBase from "@material-ui/core/InputBase";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -51,22 +55,66 @@ const styles = theme => ({
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3
+	},
+	search: {
+		position: "relative",
+		borderRadius: theme.shape.borderRadius,
+		backgroundColor: fade(theme.palette.common.white, 0.15),
+		"&:hover": {
+			backgroundColor: fade(theme.palette.common.white, 0.25)
+		},
+		marginRight: theme.spacing.unit * 2,
+		marginLeft: 0,
+		width: "100%",
+		[theme.breakpoints.up("sm")]: {
+			marginLeft: theme.spacing.unit * 3,
+			width: "auto"
+		}
+	},
+	searchIcon: {
+		width: theme.spacing.unit * 9,
+		height: "100%",
+		position: "absolute",
+		pointerEvents: "none",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	inputRoot: {
+		color: "inherit",
+		width: "100%"
+	},
+	inputInput: {
+		paddingTop: theme.spacing.unit,
+		paddingRight: theme.spacing.unit,
+		paddingBottom: theme.spacing.unit,
+		paddingLeft: theme.spacing.unit * 8,
+		transition: theme.transitions.create("width"),
+		width: "100%",
+		[theme.breakpoints.up("md")]: {
+			width: 200
+		}
 	}
 });
 
 class ResponsiveDrawer extends React.Component {
 	state = {
 		mobileOpen: false,
-		site: ""
+		site: "",
+		search: ""
 	};
 
 	handleDrawerToggle = () => {
 		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
 	};
 
+	searchHandler = e => {
+		this.setState({ search: e.target.value });
+	};
+
 	render() {
 		const { classes, theme } = this.props;
-		const { site } = this.state;
+		const { site, search } = this.state;
 
 		const drawer = (
 			<div>
@@ -115,7 +163,7 @@ class ResponsiveDrawer extends React.Component {
 					))}
 				</List>
 				<Divider />
-				<List>
+				{/*<List>
 					{["All mail", "Trash", "Spam"].map((text, index) => (
 						<ListItem button key={text}>
 							<img
@@ -128,15 +176,21 @@ class ResponsiveDrawer extends React.Component {
 							<ListItemText primary={text} />
 						</ListItem>
 					))}
-				</List>
+				</List>*/}
 			</div>
 		);
 
 		return (
 			<div className={classes.root}>
 				<CssBaseline />
-				<AppBar position="fixed" className={classes.appBar}>
-					<Toolbar>
+				<AppBar
+					style={{
+						backgroundColor: "#00838f"
+					}}
+					position="fixed"
+					className={classes.appBar}
+				>
+					<Toolbar style={{ justifyContent: "space-between" }}>
 						<IconButton
 							color="inherit"
 							aria-label="Open drawer"
@@ -148,6 +202,19 @@ class ResponsiveDrawer extends React.Component {
 						<Typography variant="h6" color="inherit" noWrap>
 							Responsive drawer
 						</Typography>
+						<div className={classes.search}>
+							<div className={classes.searchIcon}>
+								<SearchIcon />
+							</div>
+							<InputBase
+								onChange={event => this.searchHandler(event)}
+								placeholder="Αναζήτηση..."
+								classes={{
+									root: classes.inputRoot,
+									input: classes.inputInput
+								}}
+							/>
+						</div>
 					</Toolbar>
 				</AppBar>
 				<nav className={classes.drawer}>
@@ -182,7 +249,7 @@ class ResponsiveDrawer extends React.Component {
 				</nav>
 				<main className={classes.content}>
 					<div className={classes.toolbar} />
-					<Articles site={site} />
+					<Articles site={site} search={search} />
 				</main>
 			</div>
 		);
