@@ -2,6 +2,7 @@ import React from "react";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import InfiniteScroll from "react-infinite-scroller";
+import Cell from "./cell/cell";
 
 const Article = ({ site, search }) => {
 	const GET_ARTICLES = gql`
@@ -23,6 +24,7 @@ const Article = ({ site, search }) => {
 				image
 				summary
 				site
+				time
 			}
 		}
 	`;
@@ -38,7 +40,6 @@ const Article = ({ site, search }) => {
 			}}
 		>
 			{({ loading, error, data, fetchMore }) => {
-				console.log(data);
 				if (loading) return <p>Loading...</p>;
 				if (error) return <p>Error :(</p>;
 				const loadMoreFunc = () => {
@@ -71,19 +72,7 @@ const Article = ({ site, search }) => {
 					>
 						{data.articles ? (
 							data.articles.map((article, i) => {
-								return (
-									<div key={i}>
-										<h1>{article.title}</h1>
-										<p>{article.summary}</p>
-										<img
-											src={article.image}
-											alt="article"
-											height="auto"
-											width="200"
-										/>
-										<a href={article.site}>View more</a>
-									</div>
-								);
+								return <Cell key={i} info={article} />;
 							})
 						) : (
 							<p>No results</p>

@@ -18,6 +18,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import InputBase from "@material-ui/core/InputBase";
 
+import SvgIcon from "@material-ui/core/SvgIcon";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -121,46 +123,58 @@ class ResponsiveDrawer extends React.Component {
 				<div className={classes.toolbar} />
 				<Divider />
 				<List>
-					{["in.gr", "sport24", "news247"].map((text, index) => (
-						<ListItem
-							button
-							key={text}
-							onClick={() => {
-								this.setState({
-									site: text,
-									mobileOpen: false
-								});
-							}}
-						>
-							{index === 0 && (
-								<img
-									src={inGrlogo}
-									alt="logo"
-									width="auto"
-									height="20px"
-								/>
-							)}
-
-							{index === 1 && (
-								<img
-									src={sport24logo}
-									alt="logo"
-									width="auto"
-									height="20px"
-								/>
-							)}
-							{index === 2 && (
-								<img
-									src={news247logo}
-									alt="logo"
-									width="auto"
-									height="20px"
-								/>
-							)}
-
-							<ListItemText primary={text} />
-						</ListItem>
-					))}
+					{["Home", "in.gr", "sport24", "news247"].map(
+						(text, index) => (
+							<ListItem
+								button
+								key={text}
+								onClick={() => {
+									if (index > 0) {
+										this.setState({
+											site: text,
+											mobileOpen: false
+										});
+									} else {
+										this.setState({
+											site: "",
+											mobileOpen: false
+										});
+									}
+								}}
+							>
+								{index === 0 && (
+									<SvgIcon style={{ color: "#1976d2" }}>
+										<path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+									</SvgIcon>
+								)}
+								{index === 1 && (
+									<img
+										src={inGrlogo}
+										alt="logo"
+										width="auto"
+										height="20px"
+									/>
+								)}
+								{index === 2 && (
+									<img
+										src={sport24logo}
+										alt="logo"
+										width="auto"
+										height="20px"
+									/>
+								)}
+								{index === 3 && (
+									<img
+										src={news247logo}
+										alt="logo"
+										width="auto"
+										height="20px"
+									/>
+								)}
+								<ListItemText primary={text} />
+							</ListItem>
+						)
+					)}
 				</List>
 				<Divider />
 				{/*<List>
