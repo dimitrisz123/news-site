@@ -34,7 +34,7 @@ const Article = ({ site, search }) => {
 			variables={{
 				site,
 				search,
-				first: 20,
+				first: 10,
 				skip: 0,
 				orderBy: "time_DESC"
 			}}
