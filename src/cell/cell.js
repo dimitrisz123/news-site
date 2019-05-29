@@ -18,7 +18,7 @@ const styles = theme => ({
 		marginBottom: "3rem"
 	},
 	card: {
-		maxWidth: 600
+		maxWidth: 800
 	},
 	media: {
 		height: 0,
