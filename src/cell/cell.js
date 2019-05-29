@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Link from "@material-ui/core/Link";
 
-import { distanceInWords } from "date-fns";
+import { distanceInWordsToNow } from "date-fns";
 import elLocale from "date-fns/locale/el";
 
 const styles = theme => ({
@@ -31,6 +31,20 @@ const styles = theme => ({
 
 const Cell = props => {
 	const { classes, info } = props;
+	console.log(
+		"1",
+		new Date(info.time).toISOString(),
+		new Date(),
+
+		distanceInWordsToNow(
+			info.time,
+
+			{
+				locale: elLocale
+			},
+			{ includeSeconds: true }
+		)
+	);
 	return (
 		<div className={classes.wrapper}>
 			<Card className={classes.card}>
@@ -47,9 +61,8 @@ const Cell = props => {
 					// }
 					title={info.title}
 					classes={{ title: classes.title }}
-					subheader={distanceInWords(
-						new Date(info.time),
-						new Date(),
+					subheader={distanceInWordsToNow(
+						info.time,
 						{
 							locale: elLocale
 						},
