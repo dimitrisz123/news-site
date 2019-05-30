@@ -13,12 +13,15 @@ import elLocale from "date-fns/locale/el";
 
 const styles = theme => ({
 	wrapper: {
-		display: "flex",
-		justifyContent: "center",
-		marginBottom: "3rem"
+		//marginBottom: "3rem",
+		maxWidth: 600,
+		[theme.breakpoints.up("xl")]: {
+			maxWidth: 900
+		},
+		margin: "0 auto 3rem"
 	},
 	card: {
-		maxWidth: 800
+		width: "100%"
 	},
 	media: {
 		height: 0,
@@ -31,20 +34,7 @@ const styles = theme => ({
 
 const Cell = props => {
 	const { classes, info } = props;
-	console.log(
-		"1",
-		new Date(info.time).toISOString(),
-		new Date(),
 
-		distanceInWordsToNow(
-			info.time,
-
-			{
-				locale: elLocale
-			},
-			{ includeSeconds: true }
-		)
-	);
 	return (
 		<div className={classes.wrapper}>
 			<Card className={classes.card}>
