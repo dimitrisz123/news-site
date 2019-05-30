@@ -8,6 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Link from "@material-ui/core/Link";
 
+import news247logo from "../images/logo1.png";
+import inGrlogo from "../images/logo2.png";
+import sport24logo from "../images/logo3.png";
+
 import { distanceInWordsToNow } from "date-fns";
 import elLocale from "date-fns/locale/el";
 
@@ -29,6 +33,9 @@ const styles = theme => ({
 	},
 	title: {
 		fontSize: "1rem"
+	},
+	avatar: {
+		backgroundColor: "white"
 	}
 });
 
@@ -40,8 +47,34 @@ const Cell = props => {
 			<Card className={classes.card}>
 				<CardHeader
 					avatar={
-						<Avatar aria-label="Recipe" className={classes.avatar}>
-							R
+						<Avatar
+							aria-label="Site-icon"
+							className={classes.avatar}
+						>
+							{info.site.includes("news247") && (
+								<img
+									src={news247logo}
+									alt="logo"
+									width="auto"
+									height="23px"
+								/>
+							)}
+							{info.site.includes("sport24") && (
+								<img
+									src={sport24logo}
+									alt="logo"
+									width="auto"
+									height="23px"
+								/>
+							)}
+							{info.site.includes("in.gr") && (
+								<img
+									src={inGrlogo}
+									alt="logo"
+									width="auto"
+									height="23px"
+								/>
+							)}
 						</Avatar>
 					}
 					// action={
